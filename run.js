@@ -1,8 +1,8 @@
 //! Файл запуска игры
-const Field = require("./classes/Field");
-const Enemy = require("./classes/Enemy");
-const Player = require("./classes/Player");
-const Bullet = require("./classes/Bullet");
+const Field = require("./src/view/Field");
+const Enemy = require("./src/game-models/Enemy");
+const Player = require("./src/game-models/Player");
+const Bullet = require("./src/game-models/Bullet");
 const {
   shootBullet,
   updateBullets,

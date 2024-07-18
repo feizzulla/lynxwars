@@ -1,4 +1,4 @@
-const Bullet = require("../classes/Bullet");
+const Bullet = require("../src/game-models/Bullet");
 
 const shootBullet = (playerPosition) => {
   bullets.push(new Bullet(playerPosition));
