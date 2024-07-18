@@ -1,7 +1,6 @@
 class Enemy {
-  constructor(hp) {
+  constructor() {
     this.generateSkin();
-    this.hp = hp;
     this.generateStartPosition();
   }
 
@@ -24,12 +23,12 @@ class Enemy {
   }
 
   generateStartPosition() {
-    this.position = { x: null, y: 0 };
+    this.position = { x: 0, y: 0 };
     this.position.x = Math.ceil(Math.random() * 10);
   }
 
   moveDown() {
-    this.position.y -= 1;
+    this.position.y++;
   }
 
   die() {

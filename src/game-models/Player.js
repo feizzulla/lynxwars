@@ -1,34 +1,23 @@
 class Player {
-  constructor() {
-    this.skin = "o";
-    this.weapon = "o";
-    this.hp = 1;
-    this.position = { x: 0, y: 9 };
+  constructor(fieldSize) {
+    this.position = { x: Math.floor(fieldSize / 2), y: fieldSize - 1 };
+    this.symbol = "🚀";
   }
 
   moveLeft() {
-    this.position.x -= 1;
+    if (this.position.x > 0) {
+      this.position.x--;
+    }
   }
 
   moveRight() {
-    this.position.x += 1;
-  }
-
-  moveTop() {
-    this.position.y += 1;
-  }
-
-  moveBottom() {
-    this.position.y -= 1;
-  }
-
-  attack() {
-    this.bullet.fly();
+    if (this.position.x < 9) {
+      this.position.x++;
+    }
   }
 
   die() {
-    this.skin = "💀";
-    console.log("YOU ARE DEAD!💀");
+    console.log("Game Over!");
     process.exit();
   }
 }

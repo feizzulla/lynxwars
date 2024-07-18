@@ -1,12 +1,11 @@
 class Bullet {
   constructor(position) {
     this.fire = "🔥";
-    this.x = position.x;
-    this.y = position.y - 1;
+    this.position = { x: position.x, y: position.y };
   }
 
   move() {
-    this.y--;
+    this.position.y--;
   }
 
   isOutOfField() {

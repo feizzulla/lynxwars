@@ -7,7 +7,7 @@ const Player = require("../game-models/Player");
 class Game {
   constructor() {
     this.fieldSize = 10;
-    this.player = new Player();
+    this.player = new Player(this.fieldSize);
     this.enemies = [];
     this.bullets = [];
     this.view = new Field(this.fieldSize);
@@ -37,37 +37,37 @@ class Game {
     process.stdin.resume();
   }
 
-  checkHero() {
-    if (this.player.position === this.enemy.position) {
-      this.player.die();
-    }
-  }
-
-  checkEnemy() {
-    if (this.enemy.position === this.bullet.position) {
-      this.enemy.die();
-    }
+  shoot() {
+    this.bullets.push(
+      new Bullet({ x: this.player.position.x, y: this.player.position.y - 1 })
+    );
   }
 
   moveEnemies() {
     this.enemies.forEach((enemy) => enemy.moveDown());
-    this.enemies = this.enemies.filter((enemy) => enemy.position >= 0);
+    this.enemies = this.enemies.filter(
+      (enemy) => enemy.position.y < this.fieldSize
+    );
   }
 
   moveBullets() {
-    this.bullets.forEach((bullet) => bullet.moveUp());
-    this.bullets = this.bullets.filter(
-      (bullet) => bullet.position < this.fieldSize
-    );
+    this.bullets.forEach((bullet) => bullet.move());
+    this.bullets = this.bullets.filter((bullet) => bullet.position.y >= 0);
   }
 
   checkCollisions() {
     this.enemies.forEach((enemy, enemyIndex) => {
-      if (enemy.position === this.player.position) {
+      if (
+        enemy.position.x === this.player.position.x &&
+        enemy.position.y === this.player.position.y
+      ) {
         this.player.die();
       }
       this.bullets.forEach((bullet, bulletIndex) => {
-        if (bullet.position === enemy.position) {
+        if (
+          bullet.position.x === enemy.position.x &&
+          bullet.position.y === enemy.position.y
+        ) {
           this.enemies.splice(enemyIndex, 1);
           this.bullets.splice(bulletIndex, 1);
         }
@@ -86,17 +86,18 @@ class Game {
   }
 
   play() {
-    console.log(this.view);
     setInterval(() => {
       this.moveEnemies();
+      this.updateField();
       this.moveBullets();
+      this.updateField();
       this.checkCollisions();
       this.updateField();
-    }, 240);
+    }, 200);
 
-    setInterval(() => {
-      this.enemies.push(new Enemy(this.fieldSize));
-    }, 1000);
+    // setInterval(() => {
+    //   this.enemies.push(new Enemy(this.fieldSize));
+    // }, 1500);
   }
 }
 
