@@ -1,3 +1,5 @@
+console.log("init Field");
+
 class Field {
   constructor(fieldSize) {
     this.fieldSize = fieldSize;
