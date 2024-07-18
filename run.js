@@ -1,4 +1,4 @@
-//! Файл запуска игры //merge
+//! Файл запуска игры
 const Field = require("./classes/Field");
 const Enemy = require("./classes/Enemy");
 const Player = require("./classes/Player");
