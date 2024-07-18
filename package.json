@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^9.7.0"
+  },
+  "dependencies": {
+    "keypress": "^0.2.1"
   }
 }
