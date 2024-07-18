@@ -1,9 +1,9 @@
 class Player {
-  constructor(skin, weapon, hp, playerPosition) {
-    this.skin = skin;
-    this.weapon = weapon;
-    this.hp = hp;
-    this.playerPosition = playerPosition;
+  constructor() {
+    this.skin = "o";
+    this.weapon = "o";
+    this.hp = 1;
+    this.position = { x: 0, y: 9 };
   }
 
   moveLeft() {

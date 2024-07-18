@@ -1,5 +1,3 @@
-console.log("init Field");
-
 class Field {
   constructor(fieldSize) {
     this.fieldSize = fieldSize;
@@ -9,25 +7,22 @@ class Field {
   createField(fieldSize) {
     const field = [];
     for (let i = 0; i < fieldSize; i++) {
-      field.push(new Array(fieldSize * 3).fill("."));
+      field.push(new Array(fieldSize).fill("."));
     }
     return field;
   }
 
-  // Отображение игрового поля
-  displayField(field, playerPosition, emoji, bullets) {
+  displayField(field, playerPosition, enemies, bullets) {
     console.clear();
     const fieldWithPlayer = field.map((row, y) =>
       row.map((cell, x) => {
-        if (playerPosition.x === x && playerPosition.y === y) {
-          return `${emoji}`;
+        if (playerPosition.x === x && playerPosition.y === y) return "🚀";
+        for (const enemy of enemies) {
+          if (enemy.position.x === x && enemy.position.y === y) return "👾";
         }
-        for (let bullet of bullets) {
-          if (bullet.x === x && bullet.y === y) {
-            return "o";
-          }
+        for (const bullet of bullets) {
+          if (bullet.position.x === x && bullet.position.y === y) return "🔥";
         }
-        return cell;
       })
     );
     fieldWithPlayer.forEach((row) => console.log(row.join(" ")));

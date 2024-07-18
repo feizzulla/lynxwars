@@ -24,8 +24,8 @@ class Enemy {
   }
 
   generateStartPosition() {
-    this.startPosition = { x: null, y: 0 };
-    this.startPosition.x = Math.ceil(Math.random() * 30);
+    this.position = { x: null, y: 0 };
+    this.position.x = Math.ceil(Math.random() * 10);
   }
 
   moveDown() {
