@@ -3,6 +3,7 @@ const Bullet = require("../game-models/Bullet");
 const Enemy = require("../game-models/Enemy");
 const Field = require("../view/Field");
 const Player = require("../game-models/Player");
+const Difficult = require("./dufficult");
 
 class Game {
   constructor() {
@@ -13,6 +14,7 @@ class Game {
     this.view = new Field(this.fieldSize);
     this.field = this.view.createField();
     this.setupInput();
+    this.difficult = new Difficult();
   }
 
   setupInput() {
@@ -66,7 +68,8 @@ class Game {
       this.bullets.forEach((bullet, bulletIndex) => {
         if (
           bullet.position.x === enemy.position.x &&
-          bullet.position.y === enemy.position.y
+          (bullet.position.y === enemy.position.y ||
+            bullet.position.y === enemy.position.y - 1)
         ) {
           this.enemies.splice(enemyIndex, 1);
           this.bullets.splice(bulletIndex, 1);
@@ -76,7 +79,6 @@ class Game {
   }
 
   updateField() {
-    this.field = this.view.createField();
     this.view.displayField(
       this.field,
       this.player.position,
@@ -87,17 +89,22 @@ class Game {
 
   play() {
     setInterval(() => {
-      this.moveEnemies();
       this.updateField();
-      this.moveBullets();
-      this.updateField();
-      this.checkCollisions();
-      this.updateField();
-    }, 200);
+    });
 
-    // setInterval(() => {
-    //   this.enemies.push(new Enemy(this.fieldSize));
-    // }, 1500);
+    setInterval(() => {
+      this.moveBullets();
+      this.checkCollisions();
+    }, 100);
+
+    setInterval(() => {
+      this.moveEnemies();
+      this.checkCollisions();
+    }, 100);
+
+    setInterval(() => {
+      this.enemies.push(new Enemy(this.fieldSize));
+    }, 200);
   }
 }
 

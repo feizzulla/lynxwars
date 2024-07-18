@@ -6,7 +6,7 @@ class Field {
   createField() {
     const field = [];
     for (let i = 0; i < this.fieldSize; i++) {
-      field.push(new Array(this.fieldSize).fill("."));
+      field.push(new Array(this.fieldSize * 5).fill("."));
     }
     return field;
   }
