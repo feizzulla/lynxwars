@@ -2,7 +2,15 @@
 const Field = require("./classes/Field");
 const Enemy = require("./classes/Enemy");
 const Player = require("./classes/Player");
+const Bullet = require("./classes/Bullet");
+const {
+  shootBullet,
+  updateBullets,
+  playerAttack,
+} = require("./modules/playerAttackFunc");
 const keypress = require("keypress");
+
+const bullets = [];
 
 const playGame = () => {
   const newField = new Field(10);
@@ -20,11 +28,21 @@ const playGame = () => {
       process.stdin.pause();
     }
   });
-  2;
+
   process.stdin.setRawMode(true);
   process.stdin.resume();
 
-  newField.displayField(field, newPlayer.playerPosition, newPlayer.emoji);
+  setInterval(() => {
+    updateBullets();
+    newField.displayField(field, playerPosition, bullets);
+  }, 500);
+
+  newField.displayField(
+    field,
+    newPlayer.playerPosition,
+    newPlayer.emoji,
+    bullets
+  );
 };
 
 playGame();

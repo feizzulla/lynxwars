@@ -13,12 +13,20 @@ class Field {
   }
 
   // Отображение игрового поля
-  displayField(field, playerPosition, emoji) {
+  displayField(field, playerPosition, emoji, bullets) {
     console.clear();
     const fieldWithPlayer = field.map((row, y) =>
-      row.map((cell, x) =>
-        playerPosition.x === x && playerPosition.y === y ? `${emoji}` : cell
-      )
+      row.map((cell, x) => {
+        if (playerPosition.x === x && playerPosition.y === y) {
+          return `${emoji}`;
+        }
+        for (let bullet of bullets) {
+          if (bullet.x === x && bullet.y === y) {
+            return "o";
+          }
+        }
+        return cell;
+      })
     );
     fieldWithPlayer.forEach((row) => console.log(row.join(" ")));
   }

@@ -1,8 +1,41 @@
 class Enemy {
-  constructor(emoji, hp, startPosition) {
-    this.emoji = emoji;
+  constructor(hp) {
+    this.generateSkin();
     this.hp = hp;
-    this.startPosition = startPosition;
+    this.generateStartPosition();
+  }
+
+  generateSkin() {
+    const skins = [
+      "👾",
+      "💀",
+      "👹",
+      "👻",
+      "👽",
+      "👿",
+      "💩",
+      "🤡",
+      "🤺",
+      "🧛",
+      "🧟",
+      "🎃",
+    ];
+    this.skin = skins[Math.floor(Math.random() * skins.length)];
+  }
+
+  generateStartPosition() {
+    this.startPosition = { x: null, y: 0 };
+    this.startPosition.x = Math.ceil(Math.random() * 30);
+  }
+
+  moveDown() {
+    // Идём влево.
+    this.position.y -= 1;
+  }
+
+  die() {
+    this.position = "?";
+    console.log("Enemy is dead!");
   }
 }
 
