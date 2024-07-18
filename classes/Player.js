@@ -7,20 +7,22 @@ class Player {
   }
 
   // Обработка движения игрока
-  movePlayer (key) {
+  movePlayer(key, fieldSize) {
     switch (key) {
-      case 'w':
-        if (playerPosition.y > 0) playerPosition.y--;
+      case "w":
+        if (this.playerPosition.y > 0) this.playerPosition.y--;
         break;
-      case 'a':
-        if (playerPosition.x > 0) playerPosition.x--;
+      case "a":
+        if (this.playerPosition.x > 0) this.playerPosition.x--;
         break;
-      case 's':
-        if (playerPosition.y < fieldSize - 1) playerPosition.y++;
+      case "s":
+        if (this.playerPosition.y < fieldSize - 1) this.playerPosition.y++;
         break;
-      case 'd':
-        if (playerPosition.x < fieldSize - 1) playerPosition.x++;
+      case "d":
+        if (this.playerPosition.x < fieldSize * 3 - 1) this.playerPosition.x++;
         break;
     }
-  };
+  }
 }
+
+module.exports = Player;

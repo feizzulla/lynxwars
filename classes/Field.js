@@ -1,23 +1,27 @@
 class Field {
-  constructor(pablicField) {
-    this.pablicField = pablicField;
+  constructor(fieldSize) {
+    this.fieldSize = fieldSize;
   }
 
   // Создание игрового поля
-  createField (size) {
+  createField(fieldSize) {
     const field = [];
-    for (let i = 0; i < size; i++) {
-      field.push(new Array(size).fill('.'));
+    for (let i = 0; i < fieldSize; i++) {
+      field.push(new Array(fieldSize * 3).fill("."));
     }
     return field;
-  };
+  }
 
   // Отображение игрового поля
-  displayField (field, playerPosition) {
+  displayField(field, playerPosition, emoji) {
     console.clear();
-    const fieldWithPlayer = field.map((row, y) => 
-      row.map((cell, x) => (playerPosition.x === x && playerPosition.y === y) ? 'P' : cell)
+    const fieldWithPlayer = field.map((row, y) =>
+      row.map((cell, x) =>
+        playerPosition.x === x && playerPosition.y === y ? `${emoji}` : cell
+      )
     );
-    fieldWithPlayer.forEach(row => console.log(row.join(' ')));
-  };
+    fieldWithPlayer.forEach((row) => console.log(row.join(" ")));
+  }
 }
+
+module.exports = Field;

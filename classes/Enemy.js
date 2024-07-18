@@ -5,3 +5,5 @@ class Enemy {
     this.startPosition = startPosition;
   }
 }
+
+module.exports = Enemy;
