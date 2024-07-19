@@ -1,9 +1,9 @@
 class Difficult {
-  constructor(difficult = 500) {
+  constructor(difficult = 100) {
     this.difficult = difficult;
     this.fieldSizeCoefficient = this.fieldSizeCoefficient * difficult;
-    this.enemySpeed = this.enemySpeed * difficult;
-    this.enemyCreateSpeed = this.enemyCreateSpeed * difficult;
+    this.enemySpeed = 5 * difficult;
+    this.enemyCreateSpeed = 20 * difficult;
   }
 }
 

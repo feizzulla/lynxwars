@@ -16,6 +16,18 @@ class Player {
     }
   }
 
+  moveTop() {
+    if (this.position.x < 9) {
+      this.position.y--;
+    }
+  }
+
+  moveBottom() {
+    if (this.position.x < 9) {
+      this.position.y++;
+    }
+  }
+
   die() {
     console.log("Game Over!");
     process.exit();
