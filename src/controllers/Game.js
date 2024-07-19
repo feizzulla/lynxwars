@@ -4,7 +4,7 @@ const Enemy = require("../game-models/Enemy");
 const Field = require("../view/Field");
 const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
-// optimization init
+
 class Game {
   constructor() {
     this.fieldSize = 10;
@@ -14,6 +14,7 @@ class Game {
     this.view = new Field(this.fieldSize);
     this.field = this.view.createField();
     this.setupInput();
+    this.diffucult = new Difficult(50);
   }
 
   setupInput() {
@@ -94,16 +95,16 @@ class Game {
     setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
-    }, 100);
+    }, 200);
 
     setInterval(() => {
       this.moveEnemies();
       this.checkCollisions();
-    }, 100);
+    }, this.diffucult.enemySpeed);
 
     setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
-    }, 200);
+    }, this.diffucult.enemyCreateSpeed);
   }
 }
 
