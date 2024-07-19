@@ -1,5 +1,6 @@
-import inquirer from 'inquirer'; 
-const LogRegPrompt = async () => {
+const inquirer = require("inquirer").default;
+
+const logRegPrompt = async () => {
   await inquirer
     .prompt([
       {
@@ -69,6 +70,6 @@ const settingsPromt = async () => {
 
 //> вызовы функций
 {
-await LogRegPrompt();
-await settingsPromt();
+LogRegPrompt();
+settingsPromt();
 }
