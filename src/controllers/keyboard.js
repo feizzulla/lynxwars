@@ -1,7 +1,7 @@
 const keypress = require("keypress");
 
 function movePlayer(key, fieldSize) {
-  switch (key) {
+  switch (key.name) {
     case "w":
       if (this.playerPosition.y > 0) this.playerPosition.y--;
       break;

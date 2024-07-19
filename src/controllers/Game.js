@@ -1,3 +1,4 @@
+const player = require("node-wav-player");
 const keypress = require("keypress");
 const Bullet = require("../game-models/Bullet");
 const Enemy = require("../game-models/Enemy");
@@ -6,15 +7,16 @@ const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
 
 class Game {
-  constructor() {
-    this.fieldSize = 10;
+  constructor(fieldSize, diffucultValue) {
+    this.fieldSize = fieldSize;
+    this.diffucultValue = diffucultValue;
     this.player = new Player(this.fieldSize);
     this.enemies = [];
     this.bullets = [];
     this.view = new Field(this.fieldSize);
     this.field = this.view.createField();
     this.setupInput();
-    this.difficult = new Difficult();
+    this.diffucult = new Difficult(this.diffucultValue);
   }
 
   setupInput() {
@@ -26,6 +28,10 @@ class Game {
           this.player.moveLeft();
         } else if (key.name === "d") {
           this.player.moveRight();
+        } else if (key.name === "w") {
+          this.player.moveTop();
+        } else if (key.name === "s") {
+          this.player.moveBottom();
         } else if (key.name === "space") {
           this.shoot();
         }
@@ -43,6 +49,9 @@ class Game {
     this.bullets.push(
       new Bullet({ x: this.player.position.x, y: this.player.position.y - 1 })
     );
+    player.play({
+      path: "./src/sounds/shot.wav",
+    });
   }
 
   moveEnemies() {
@@ -63,7 +72,12 @@ class Game {
         enemy.position.x === this.player.position.x &&
         enemy.position.y === this.player.position.y
       ) {
-        this.player.die();
+        player.play({
+          path: "./src/sounds/congratulations.wav",
+        });
+        setTimeout(() => {
+          this.player.die();
+        }, 2000);
       }
       this.bullets.forEach((bullet, bulletIndex) => {
         if (
@@ -79,6 +93,7 @@ class Game {
   }
 
   updateField() {
+    console.clear();
     this.view.displayField(
       this.field,
       this.player.position,
@@ -95,16 +110,16 @@ class Game {
     setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
-    }, 100);
+    }, 150);
 
     setInterval(() => {
       this.moveEnemies();
       this.checkCollisions();
-    }, 100);
+    }, this.diffucult.enemySpeed);
 
     setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
-    }, 200);
+    }, 500);
   }
 }
 
