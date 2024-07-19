@@ -1,10 +1,10 @@
-const { Op } = require('sequelize');
-const { User, Scores } = require('../db/models');
 
-const createUser = async (name, login, password, age) => {
+const { User, Score } = require('../db/models');
+
+
+const createUser = async (name, age, login, password) => {
 try {
-    const newUser = await User.create({name, login, password, age})
-    const newScore = await Scores.create({score: 0})
+    const newUser = await User.create({name, age, login, password})
     console.log(newUser);
     console.log(newScore);
 } catch (error) {
