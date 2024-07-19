@@ -1,4 +1,4 @@
-import inquirer from 'inquirer';
+import inquirer from 'inquirer'; 
 const LogRegPrompt = async () => {
   await inquirer
     .prompt([
