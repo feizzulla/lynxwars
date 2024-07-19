@@ -1,5 +1,4 @@
-const sound = require("play-sound")((opts = {}));
-
+const player = require("node-wav-player");
 const keypress = require("keypress");
 const Bullet = require("../game-models/Bullet");
 const Enemy = require("../game-models/Enemy");
@@ -50,9 +49,9 @@ class Game {
     this.bullets.push(
       new Bullet({ x: this.player.position.x, y: this.player.position.y - 1 })
     );
-    //     sound.play("../sounds/shot.wav", function (err) {
-    //   if (err) throw err;
-    // });
+    player.play({
+      path: "./src/sounds/shot.wav",
+    });
   }
 
   moveEnemies() {
@@ -73,7 +72,12 @@ class Game {
         enemy.position.x === this.player.position.x &&
         enemy.position.y === this.player.position.y
       ) {
-        this.player.die();
+        player.play({
+          path: "./src/sounds/congratulations.wav",
+        });
+        setTimeout(() => {
+          this.player.die();
+        }, 2000);
       }
       this.bullets.forEach((bullet, bulletIndex) => {
         if (
