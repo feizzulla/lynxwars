@@ -11,12 +11,12 @@ class Field {
     return field;
   }
 
-  displayField(field, playerPosition, enemies, bullets) {
+  displayField(field, playerPosition, enemies, bullets, userSkin) {
     console.clear();
     const fieldWithEntities = field.map((row, y) =>
       row.map((cell, x) => {
         if (playerPosition.x === x && playerPosition.y === y) {
-          return "🚀";
+          return userSkin;
         }
         for (const enemy of enemies) {
           if (enemy.position.x === x && enemy.position.y === y) {

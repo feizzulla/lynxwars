@@ -7,10 +7,11 @@ const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
 
 class Game {
-  constructor(fieldSize, diffucultValue) {
+  constructor(fieldSize, diffucultValue, skin) {
+    this.skin = skin;
     this.fieldSize = fieldSize;
     this.diffucultValue = diffucultValue;
-    this.player = new Player(this.fieldSize);
+    this.player = new Player(this.fieldSize, 0, this.skin);
     this.enemies = [];
     this.bullets = [];
     this.view = new Field(this.fieldSize);
@@ -87,6 +88,7 @@ class Game {
         ) {
           this.enemies.splice(enemyIndex, 1);
           this.bullets.splice(bulletIndex, 1);
+          this.player.score += 5;
         }
       });
 
@@ -109,14 +111,15 @@ class Game {
       this.field,
       this.player.position,
       this.enemies,
-      this.bullets
+      this.bullets,
+      this.player.symbol
     );
   }
 
   play() {
     setInterval(() => {
       this.updateField();
-    });
+    }, 50);
 
     setInterval(() => {
       this.moveBullets();
@@ -130,7 +133,7 @@ class Game {
 
     setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
-    }, 500);
+    }, this.diffucult.enemyCreateSpeed);
   }
 }
 

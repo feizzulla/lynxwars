@@ -1,7 +1,8 @@
 class Player {
-  constructor(fieldSize) {
+  constructor(fieldSize, score, symbol) {
     this.position = { x: Math.floor(fieldSize / 2), y: fieldSize - 1 };
-    this.symbol = "🚀";
+    this.symbol = symbol;
+    this.score = score;
   }
 
   moveLeft() {
@@ -17,19 +18,20 @@ class Player {
   }
 
   moveTop() {
-    if (this.position.x < 9) {
+    if (this.position.y < 9) {
       this.position.y--;
     }
   }
 
   moveBottom() {
-    if (this.position.x < 9) {
+    if (this.position.y < 9) {
       this.position.y++;
     }
   }
 
   die() {
     console.log("Game Over!");
+    console.log(`Вы заработали ${this.score} очков!`);
     process.exit();
   }
 }

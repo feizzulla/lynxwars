@@ -4,16 +4,16 @@ const logRegPrompt = async () => {
   await inquirer
     .prompt([
       {
-        name: 'isRegChoised',
-        type: 'list',
-        message: 'lynxWars 0.0.1',
+        name: "isRegChoised",
+        type: "list",
+        message: "lynxWars 0.0.1",
         choices: [
-          { name: 'Вход', value: false },
-          { name: 'Регистрация', value: true },
+          { name: "Вход", value: false },
+          { name: "Регистрация", value: true },
         ],
       },
-      { name: 'login', type: 'input', message: 'логин' },
-      { name: 'password', type: 'password', message: 'пароль', mask: '*' },
+      { name: "login", type: "input", message: "логин" },
+      { name: "password", type: "password", message: "пароль", mask: "*" },
     ])
     .then((answers) => {
       //* answers =
@@ -33,27 +33,27 @@ const settingsPromt = async () => {
   await inquirer
     .prompt([
       {
-        name: 'difficulty',
-        type: 'list',
-        message: 'Выберите сложность',
+        name: "difficulty",
+        type: "list",
+        message: "Выберите сложность",
         choices: [
-          { name: 'Легко', value: 0 },
-          { name: 'Нормально', value: 1 },
-          { name: 'Сложно', value: 2 },
-          { name: 'Кошмар', value: 3 },
+          { name: "Легко", value: 0 },
+          { name: "Нормально", value: 1 },
+          { name: "Сложно", value: 2 },
+          { name: "Кошмар", value: 3 },
         ],
       },
       {
-        name: 'skin',
-        type: 'list',
-        message: 'Выберите скин',
+        name: "skin",
+        type: "list",
+        message: "Выберите скин",
         choices: [
-          { name: '1', value: 0 },
-          { name: '2', value: 1 },
-          { name: '3', value: 2 },
-          { name: '4', value: 3 },
+          { name: "1", value: 0 },
+          { name: "2", value: 1 },
+          { name: "3", value: 2 },
+          { name: "4", value: 3 },
         ],
-      }
+      },
     ])
     .then((answers) => {
       //*answers =
@@ -67,9 +67,10 @@ const settingsPromt = async () => {
     });
 };
 
-
 //> вызовы функций
 {
-LogRegPrompt();
-settingsPromt();
+  LogRegPrompt();
+  settingsPromt();
 }
+
+module.exports = { LogRegPrompt, settingsPromt };
