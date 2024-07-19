@@ -1,7 +1,7 @@
 class Enemy {
-  constructor() {
+  constructor(fieldSizeX) {
     this.generateSkin();
-    this.generateStartPosition();
+    this.generateStartPosition(fieldSizeX);
   }
 
   generateSkin() {
@@ -22,9 +22,9 @@ class Enemy {
     this.skin = skins[Math.floor(Math.random() * skins.length)];
   }
 
-  generateStartPosition() {
+  generateStartPosition(fieldSizeX) {
     this.position = { x: 0, y: 0 };
-    this.position.x = Math.ceil(Math.random() * 10);
+    this.position.x = Math.ceil(Math.random() * fieldSizeX * 3);
   }
 
   moveDown() {

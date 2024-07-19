@@ -11,7 +11,7 @@ class Player {
   }
 
   moveRight() {
-    if (this.position.x < 9) {
+    if (this.position.x < 9 * 3) {
       this.position.x++;
     }
   }

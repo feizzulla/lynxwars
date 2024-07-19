@@ -110,7 +110,7 @@ class Game {
 
     setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
-    }, 100);
+    }, 1000);
   }
 }
 
