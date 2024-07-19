@@ -10,9 +10,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^9.7.0"
+    "eslint": "^9.7.0",
+    "sequelize-cli": "^6.6.2"
   },
   "dependencies": {
-    "keypress": "^0.2.1"
+    "keypress": "^0.2.1",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
   }
 }
