@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     age: DataTypes.INTEGER,
     login: DataTypes.STRING,
-    password: DataTypes.INTEGER
+    password: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',

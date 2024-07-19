@@ -1,4 +1,7 @@
-import inquirer from "inquirer";
+const inquirer = require('inquirer').default
+const createUser = require('./sequelizer-for-inquirer')
+const Game = require("../src/controllers/Game.js");
+
 
 const logRegPrompt = async () => {
   await inquirer
@@ -14,15 +17,17 @@ const logRegPrompt = async () => {
       },
       { name: 'login', type: 'input', message: 'логин' },
       { name: 'password', type: 'password', message: 'пароль', mask: '*' },
-    ])
-    .then((answers) => {
+    ])  ///name, age, login, password
+    .then((answers) => createUser("123", 123, answers.login, answers.password)
       //* answers =
       //* {
       //*   isRegChoised: false(или true),
       //*   login: "123",
       //*   password: "456",
       //* }
-    })
+
+    )
+
     .catch((error) => {
       console.log(error);
       // Prompt couldn't be rendered in the current environment
@@ -69,7 +74,9 @@ const settingsPromt = async () => {
 
 
 //> вызовы функций
-{
-await logRegPrompt();
-await settingsPromt();
+
+async function startinquirer() {
+  await logRegPrompt();
+  await settingsPromt();
 }
+module.exports = startinquirer;

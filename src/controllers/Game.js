@@ -102,7 +102,7 @@ class Game {
     );
   }
 
-  play() {
+  async play() {
     setInterval(() => {
       this.updateField();
     });
