@@ -6,15 +6,16 @@ const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
 
 class Game {
-  constructor() {
-    this.fieldSize = 10;
+  constructor(fieldSize, diffucultValue) {
+    this.fieldSize = fieldSize;
+    this.diffucultValue = diffucultValue;
     this.player = new Player(this.fieldSize);
     this.enemies = [];
     this.bullets = [];
     this.view = new Field(this.fieldSize);
     this.field = this.view.createField();
     this.setupInput();
-    this.diffucult = new Difficult(50);
+    this.diffucult = new Difficult(this.diffucultValue);
   }
 
   setupInput() {
@@ -26,6 +27,10 @@ class Game {
           this.player.moveLeft();
         } else if (key.name === "d") {
           this.player.moveRight();
+        } else if (key.name === "w") {
+          this.player.moveTop();
+        } else if (key.name === "s") {
+          this.player.moveBottom();
         } else if (key.name === "space") {
           this.shoot();
         }
@@ -79,6 +84,7 @@ class Game {
   }
 
   updateField() {
+    console.clear();
     this.view.displayField(
       this.field,
       this.player.position,
@@ -95,7 +101,7 @@ class Game {
     setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
-    }, 200);
+    }, 40);
 
     setInterval(() => {
       this.moveEnemies();
@@ -104,7 +110,7 @@ class Game {
 
     setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
-    }, this.diffucult.enemyCreateSpeed);
+    }, 100);
   }
 }
 
