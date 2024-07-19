@@ -1,3 +1,5 @@
+const sound = require("play-sound")((opts = {}));
+
 const keypress = require("keypress");
 const Bullet = require("../game-models/Bullet");
 const Enemy = require("../game-models/Enemy");
@@ -48,6 +50,9 @@ class Game {
     this.bullets.push(
       new Bullet({ x: this.player.position.x, y: this.player.position.y - 1 })
     );
+    //     sound.play("../sounds/shot.wav", function (err) {
+    //   if (err) throw err;
+    // });
   }
 
   moveEnemies() {
@@ -101,7 +106,7 @@ class Game {
     setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
-    }, 40);
+    }, 150);
 
     setInterval(() => {
       this.moveEnemies();
@@ -110,7 +115,7 @@ class Game {
 
     setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
-    }, 100);
+    }, 500);
   }
 }
 
