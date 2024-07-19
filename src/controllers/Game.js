@@ -4,7 +4,7 @@ const Enemy = require("../game-models/Enemy");
 const Field = require("../view/Field");
 const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
-
+// optimization init
 class Game {
   constructor() {
     this.fieldSize = 10;
@@ -14,7 +14,6 @@ class Game {
     this.view = new Field(this.fieldSize);
     this.field = this.view.createField();
     this.setupInput();
-    this.difficult = new Difficult();
   }
 
   setupInput() {
