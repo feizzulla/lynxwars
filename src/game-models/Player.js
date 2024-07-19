@@ -10,8 +10,8 @@ class Player {
     }
   }
 
-  moveRight() {
-    if (this.position.x < 9 * 3) {
+  moveRight(fieldSize) {
+    if (this.position.x < fieldSize * 2 - 1) {
       this.position.x++;
     }
   }

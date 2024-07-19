@@ -6,8 +6,8 @@ class Field {
   createField() {
     const field = [];
     for (let i = 0; i < this.fieldSize; i++) {
-      field.push(new Array(this.fieldSize * 3).fill("\u3000"));
-    } //
+      field.push(new Array(this.fieldSize * 2).fill("\u3000"));
+    }
     return field;
   }
 

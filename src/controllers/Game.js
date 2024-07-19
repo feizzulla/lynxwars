@@ -1,3 +1,4 @@
+const player = require("node-wav-player");
 const keypress = require("keypress");
 const Bullet = require("../game-models/Bullet");
 const Enemy = require("../game-models/Enemy");
@@ -13,9 +14,9 @@ class Game {
     this.enemies = [];
     this.bullets = [];
     this.view = new Field(this.fieldSize);
-    this.field = this.view.createField();
-    this.setupInput();
     this.diffucult = new Difficult(this.diffucultValue);
+    this.field = this.view.createField(this.fieldSize);
+    this.setupInput();
   }
 
   setupInput() {
@@ -26,7 +27,7 @@ class Game {
         if (key.name === "a") {
           this.player.moveLeft();
         } else if (key.name === "d") {
-          this.player.moveRight();
+          this.player.moveRight(this.fieldSize);
         } else if (key.name === "w") {
           this.player.moveTop();
         } else if (key.name === "s") {
@@ -48,6 +49,9 @@ class Game {
     this.bullets.push(
       new Bullet({ x: this.player.position.x, y: this.player.position.y - 1 })
     );
+    player.play({
+      path: "./src/sounds/shot.wav",
+    });
   }
 
   moveEnemies() {
@@ -68,7 +72,12 @@ class Game {
         enemy.position.x === this.player.position.x &&
         enemy.position.y === this.player.position.y
       ) {
-        this.player.die();
+        player.play({
+          path: "./src/sounds/congratulations.wav",
+        });
+        setTimeout(() => {
+          this.player.die();
+        }, 2000);
       }
       this.bullets.forEach((bullet, bulletIndex) => {
         if (
@@ -78,6 +87,17 @@ class Game {
         ) {
           this.enemies.splice(enemyIndex, 1);
           this.bullets.splice(bulletIndex, 1);
+        }
+      });
+
+      this.enemies.forEach((enemy) => {
+        if (enemy.position.y === 9) {
+          player.play({
+            path: "./src/sounds/congratulations.wav",
+          });
+          setTimeout(() => {
+            this.player.die();
+          }, 2000);
         }
       });
     });
@@ -101,7 +121,7 @@ class Game {
     setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
-    }, 40);
+    }, 150);
 
     setInterval(() => {
       this.moveEnemies();
@@ -110,7 +130,7 @@ class Game {
 
     setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
-    }, 1000);
+    }, 500);
   }
 }
 
