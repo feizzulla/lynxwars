@@ -1,7 +1,6 @@
-const inquirer = require('inquirer').default
-const createUser = require('./sequelizer-for-inquirer')
-const Game = require("../src/controllers/Game.js");
-
+const inquirer = require('inquirer').default;
+const createUser = require('./sequelizer-for-inquirer');
+const Game = require('../src/controllers/Game.js');
 
 const logRegPrompt = async () => {
   await inquirer
@@ -15,18 +14,22 @@ const logRegPrompt = async () => {
           { name: 'Регистрация', value: true },
         ],
       },
+      { name: 'name', type: 'type',message: 'введите ваше имя'},
+      { name: 'age', type: 'type', message: 'введите ваш возраст'},
       { name: 'login', type: 'input', message: 'логин' },
       { name: 'password', type: 'password', message: 'пароль', mask: '*' },
-    ])  ///name, age, login, password
-    .then((answers) => createUser("123", 123, answers.login, answers.password)
+    ]) ///name, age, login, password
+    .then((answers) => {
+      if (answers.isRegChoised) {
+        createUser(answers.name, answers.age, answers.login, answers.password);
+      }
       //* answers =
       //* {
       //*   isRegChoised: false(или true),
       //*   login: "123",
       //*   password: "456",
       //* }
-
-    )
+    })
 
     .catch((error) => {
       console.log(error);
@@ -58,7 +61,7 @@ const settingsPromt = async () => {
           { name: '3', value: 2 },
           { name: '4', value: 3 },
         ],
-      }
+      },
     ])
     .then((answers) => {
       //*answers =
@@ -71,7 +74,6 @@ const settingsPromt = async () => {
       // Prompt couldn't be rendered in the current environment
     });
 };
-
 
 //> вызовы функций
 
